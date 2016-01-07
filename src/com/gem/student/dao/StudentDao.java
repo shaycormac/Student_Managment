@@ -326,5 +326,49 @@ public class StudentDao {
 		
 	}
 	
-	//模糊查询
+	//模糊查询，根据输入的字符串，给出学生对象的集合（不止一个）
+	public List<Student> getStudentByName(String regex)
+	{
+		Connection coon=null;
+		PreparedStatement pStatement = null;
+		ResultSet rs =null;
+		List<Student> list = new ArrayList<>();
+		try {
+			coon=DBConnection.getConnection();
+			String sql = "select * from student where name like ?";
+			pStatement=coon.prepareStatement(sql);
+			pStatement.setString(1,"%"+regex+"%");
+			rs=pStatement.executeQuery();
+			Student s = null;
+			while (rs.next())
+			{
+				s= new Student();
+				s.setName(rs.getString("name"));
+				s.setId(rs.getInt("id"));
+				s.setPassword(rs.getString("password"));
+				s.setSex(rs.getInt("sex"));
+				s.setPolity(rs.getInt("polity"));
+				s.setBrief(rs.getString("brief"));
+				s.setSno(rs.getString("sno"));
+				s.setBirthday(rs.getDate("birthday"));
+				list.add(s);	
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new DaoRunTimeException("找不到相关的class文件");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new DaoRunTimeException("SQL出错");
+		}finally {
+			DBConnection.release(coon, pStatement, rs);
+		}
+		
+		
+		return list;
+		
+	}
+	
 }

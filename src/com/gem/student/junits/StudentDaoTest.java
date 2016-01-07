@@ -8,6 +8,7 @@ package com.gem.student.junits;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -115,6 +116,20 @@ public class StudentDaoTest
 	{
 		StudentDao sDao = new StudentDao();
 		sDao.getPagedStudents(3, 4);
+		
+	}
+	
+	@Test
+	public void testGetStudentByName ()
+	{
+		StudentDao sDao = new StudentDao();
+		List<Student> list = sDao.getStudentByName("蛋");
+		for (Student student : list) 
+		{
+			System.out.println(student);
+		}
+		
+		
 		
 	}
 

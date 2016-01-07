@@ -24,6 +24,7 @@ public class ErrorLog
 	public static void printErrorLog (PrintStream s,Exception e)
 	{
 		try {
+			//普通的io读取的相对路径，是编译期的路径，即工程作为根目录
 			s = new PrintStream(new FileOutputStream("src\\exceptionLog.txt", true));
 			java.util.Date date = new java.util.Date();
 			SimpleDateFormat sFormat = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
