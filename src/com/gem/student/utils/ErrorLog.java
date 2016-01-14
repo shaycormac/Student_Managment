@@ -33,9 +33,12 @@ public class ErrorLog
 			s.flush();
 			s.println(x);
 			s.flush();
-		} catch (FileNotFoundException e1) {
+		} catch (FileNotFoundException e1)
+		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			//一定要处理啊
+			throw new RuntimeException("文件找不到！");
 		}
 		e.printStackTrace(s);
 		s.println("-----------------------------------");

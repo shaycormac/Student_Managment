@@ -15,6 +15,7 @@ import java.util.List;
 import com.gem.student.entity.Student;
 import com.gem.student.exception.DaoRunTimeException;
 import com.gem.student.utils.DBConnection;
+import com.gem.student.utils.ErrorLog;
 
 /**
 * @author 炳华儿 E-mail: 574583006@qq.com
@@ -99,40 +100,16 @@ public class StudentDao {
 		} catch (ClassNotFoundException e) 
 		{
 			PrintStream s = null;
-			try 
-			{
-				s = new PrintStream(new FileOutputStream("C:\\Users\\Administrator\\workspace\\student\\src\\exceptionLog.txt", true));
-				java.util.Date date = new java.util.Date();
-				SimpleDateFormat sFormat = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
-				String x =sFormat.format(date);
-				s.println(x);
-				s.flush();
-			} catch (FileNotFoundException e1) 
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			ErrorLog.printErrorLog(s, e);
 			// 输出错误日志，加上时间？
 			e.printStackTrace(s);
 			s.close();
 			System.out.println("error");
-		
 			throw new DaoRunTimeException("Class发现不了");
 		} catch (SQLException e)
 		{
 			PrintStream s = null;
-			try 
-			{
-				s = new PrintStream(new FileOutputStream("src\\exceptionLog.txt", true));
-				java.util.Date date = new java.util.Date();
-				SimpleDateFormat sFormat = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
-				String x =sFormat.format(date);
-				s.println(x);
-			} catch (FileNotFoundException e1) 
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			ErrorLog.printErrorLog(s, e);
 			// 输出错误日志，加上时间？
 			e.printStackTrace(s);
 			System.out.println("error");

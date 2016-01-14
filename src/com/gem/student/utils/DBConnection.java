@@ -30,7 +30,8 @@ public class DBConnection
 			//InputStream in = url.openStream();
 		//	System.out.println(url.getPath());
 			properties.load(in);
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
